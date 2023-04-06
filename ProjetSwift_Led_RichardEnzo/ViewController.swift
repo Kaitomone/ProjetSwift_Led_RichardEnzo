@@ -11,10 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     private var mqttManager:MQTTManager!
-    @IBOutlet weak var ipAddressField: UITextField!
-    @IBOutlet weak var topicField: UITextField!
-    @IBOutlet weak var messageField: UITextField!
-    @IBOutlet weak var messageHistoryView: UITextView!
+    @IBOutlet weak var usagerTxtField: UITextField!
+    @IBOutlet weak var motDePasseTxtField: UITextField!
+    @IBOutlet weak var messageTxtField: UITextField!
     @IBOutlet weak var connectBtn: UIButton!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var setTopicBtn: UIButton!
@@ -33,25 +32,25 @@ class ViewController: UIViewController {
 
     @IBAction func connect(){
 
-        guard let ipAddr = ipAddressField.text, let topicVal = topicField.text  else {
+        guard let usagerVal = usagerTxtField.text, let motDePasseVal = motDePasseTxtField.text  else {
 
             return
         }
         
-        if (ipAddr.isEmpty && topicVal.isEmpty) {
-            update(message: "Please fill the ip and topic fields")
+        if (usagerVal.isEmpty && motDePasseVal.isEmpty) {
+            //update(message: "Veuillez remplir les champs de connexion")
             return
         }
-        mqttManager = MQTTManager.shared(with: self.title!, host: ipAddr,topic: topicVal, presenter: self)
+        mqttManager = MQTTManager.shared(with: self.title!, host: usagerVal,topic: motDePasseVal, presenter: self)
         mqttManager.connect()
         
     }
     @IBAction func send(){
-        guard let msg = messageField.text else {
+        guard let msg = messageTxtField.text else {
             return
         }
         send(message: msg)
-        messageField.text = ""
+        messageTxtField.text = ""
     }
     func send(message: String){
         
@@ -61,19 +60,23 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: PresenterProtocol{
+    func update(message: String) {
+        <#code#>
+    }
+    
     
     func resetUIWithConnection(status: Bool){
         
-        ipAddressField.isEnabled = !status
-        topicField.isEnabled = !status
-        messageField.isEnabled = status
+        usagerTxtField.isEnabled = !status
+        motDePasseTxtField.isEnabled = !status
+        messageTxtField.isEnabled = status
         connectBtn.isEnabled = !status
         sendBtn.isEnabled = status
         
         if (status){
-            updateStatusViewWith(status: "Connected")
+            updateStatusViewWith(status: "Connecter")
         }else{
-            updateStatusViewWith(status: "Disconnected")
+            updateStatusViewWith(status: "Déconnecter")
         }
     }
     func updateStatusViewWith(status: String){
@@ -81,7 +84,7 @@ extension ViewController: PresenterProtocol{
         statusLabl.text = status
     }
     
-    func update(message: String){
+    /*func update(message: String){
         
         if let text = messageHistoryView.text{
             let newText = """
@@ -100,7 +103,7 @@ extension ViewController: PresenterProtocol{
         messageHistoryView.scrollRangeToVisible(myRange)
         
         
-    }
+    }*/
     
     
 }
