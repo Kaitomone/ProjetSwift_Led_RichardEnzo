@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
+   LastUpgradeVersion = "1300"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C2FC9CDB93A3AAFD9D04CA4C5247B861"
-               BuildableName = "Pods_ProjetSwift_Led_RichardEnzo.framework"
-               BlueprintName = "Pods-ProjetSwift_Led_RichardEnzo"
+               BlueprintIdentifier = "D6F335D1089FA49A6C0ACBE430636879"
+               BuildableName = "Pods_ProjetSwift_Led_MQTT_ProjetSwift_Led_MQTTUITests.framework"
+               BlueprintName = "Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
