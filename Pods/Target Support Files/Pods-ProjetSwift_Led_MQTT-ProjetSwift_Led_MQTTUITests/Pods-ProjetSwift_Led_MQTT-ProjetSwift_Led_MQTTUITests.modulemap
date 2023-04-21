@@ -1,0 +1,6 @@
+framework module Pods_ProjetSwift_Led_MQTT_ProjetSwift_Led_MQTTUITests {
+  umbrella header "Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

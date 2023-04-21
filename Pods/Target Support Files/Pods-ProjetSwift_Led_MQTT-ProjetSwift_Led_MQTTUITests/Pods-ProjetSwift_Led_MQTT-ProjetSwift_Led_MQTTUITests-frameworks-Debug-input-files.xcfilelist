@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests/Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework
+${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework
