@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextFieldBase: View {
+struct TxtField: View {
     var placeHolderMessage: String
     @Binding var message: String
     var body: some View {
@@ -18,8 +18,8 @@ struct TextFieldBase: View {
     }
 }
 
-struct TextFieldBase: PreviewProvider {
+struct TxtField_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldBase(placeHolderMessage: "Hello", message: .constant("hello"))
+        TxtField(placeHolderMessage: "Hello", message: .constant("hello"))
     }
 }

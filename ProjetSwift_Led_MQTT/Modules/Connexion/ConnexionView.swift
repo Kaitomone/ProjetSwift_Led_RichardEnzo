@@ -10,12 +10,11 @@ import SwiftUI
 struct ConnexionView: View {
     @State var usager: String = ""
     @State var motDePasse: String = ""
-    @EnvironmentObject private var mqttManager: MQTTManager
     var body: some View {
         VStack {
             Text("Connexion")
                 .font(.system(size: 50.0))
-            MQTTTextField(placeHolderMessage: "Entrez l'usager", message: $usager)
+            TxtField(placeHolderMessage: "Entrez l'usager", message: $usager)
                 .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
             MQTTTextFieldMdp(placeHolderMessage: "Entrez le mot de passe", message: $motDePasse)
                 .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
@@ -25,8 +24,12 @@ struct ConnexionView: View {
                 }) {
                     Text("Envoyer").font(.body)
                 }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
-                    .frame(width: 80)
+                    .frame(width: 100)
             }
+            Image("MVMC")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 350, height: 500)
             .padding()
             Spacer()
         }
