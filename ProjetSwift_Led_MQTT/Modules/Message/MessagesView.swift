@@ -25,7 +25,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct MessageView: View {
-    @State var topic: String = ""
     @State var listePanneau = ["Petit", "Moyen", "Grand"]
     @State var selectedPanneau = "Petit" // Ajout d'une variable pour stocker la sélection
     @State var valueR: String = ""
@@ -35,22 +34,10 @@ struct MessageView: View {
     @EnvironmentObject private var mqttManager: MQTTManager
     var body: some View {
         VStack {
-            NavigationLink(destination: SettingsView(),
-                               label: {
-                                   Image(systemName: "gear")
-                                       .frame(width: 50)
-                               })
-                    .alignmentGuide(HorizontalAlignment.trailing) { d in
-                        d[HorizontalAlignment.trailing]
-                    }
-                    .alignmentGuide(VerticalAlignment.top) { d in
-                        d[VerticalAlignment.top]
-                    }
             Text("Affichage LED")
                 .font(.system(size: 40.0))
-
             Text("Liste des panneaux")
-                .padding(.top, 35)
+                .padding(.top, 10)
             HStack {
                 // Ajout de la liste déroulante
                 Picker("Sélectionner un panneau", selection: $selectedPanneau) {
@@ -59,11 +46,6 @@ struct MessageView: View {
                     }
                 }
                 .pickerStyle(DefaultPickerStyle())
-            }
-            Text("Topic")
-                .padding(.top, 20)
-            HStack {
-                MQTTTextField(placeHolderMessage: "Entrez le topic", message: $topic)
             }
             Text("Couleur")
                 .padding(.top, 20)
@@ -81,18 +63,19 @@ struct MessageView: View {
                 }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
                     .frame(width: 80)
             }
-        }.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
-        
-        Image("MVMC")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 350, height: 200)
-        
-            
-        Spacer()
-        
+            Image("MVMC")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 350, height: 200)
+            Spacer()
+        }
+        .padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
+        .navigationBarItems(trailing: NavigationLink(
+            destination: SettingsView(),
+            label: {
+                Image(systemName: "gear")
+            }))
     }
-
 
     private func send(message: String) {
         let finalMessage = "SwiftUIIOS says: \(message)"
