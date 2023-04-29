@@ -46,17 +46,16 @@ final class MQTTManager: ObservableObject {
         self.host = host
         self.username = username
         self.password = password
-        let clientID = "CocoaMQTT-\(identifier)-" + String(ProcessInfo().processIdentifier)
+
 
         // TODO: Guard
-        mqttClient = CocoaMQTT(clientID: clientID, host: host, port: 1883)
+        mqttClient = CocoaMQTT(clientID: identifier, host: host, port: 1883)
         // If a server has username and password, pass it here
         if let finalusername = self.username, let finalpassword = self.password {
             mqttClient?.username = finalusername
             
             mqttClient?.password = finalpassword
         }
-        mqttClient?.willMessage = CocoaMQTTWill(topic: "/will", message: "dieout")
         mqttClient?.keepAlive = 60
         mqttClient?.delegate = self
     }
@@ -96,6 +95,10 @@ final class MQTTManager: ObservableObject {
         return host
     }
     
+    func currentTopic() -> String? {
+        return topic
+    }
+    
     func isSubscribed() -> Bool {
        return currentAppState.appConnectionState.isSubscribed
     }
@@ -110,17 +113,26 @@ final class MQTTManager: ObservableObject {
 }
 
 extension MQTTManager: CocoaMQTTDelegate {
-    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topics: [String]) {
-        TRACE("topic: \(topics)")
-        currentAppState.setAppConnectionState(state: .connectedSubscribed)
-    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
 
+           TRACE("trust: \(trust)")
+
+           completionHandler(true)
+
+       }
+    
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         TRACE("ack: \(ack)")
 
         if ack == .accept {
             currentAppState.setAppConnectionState(state: .connected)
         }
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topics: [String]) {
+        TRACE("topic: \(topics)")
+        currentAppState.setAppConnectionState(state: .connectedSubscribed)
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -132,8 +144,18 @@ extension MQTTManager: CocoaMQTTDelegate {
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-        TRACE("message: \(message.string.description), id: \(id)")
-        currentAppState.setReceivedMessage(text: "CO2 : "+message.string.description)
+        if message.string.description == "Petit" || message.string.description == "Moyen" || message.string.description == "Grand"{
+            // Stockez la valeur dans votre @State
+            DispatchQueue.main.async {
+                self.currentAppState.panneauText = message.string.description
+            }
+            TRACE("panneau: \(message.string.description)")
+            currentAppState.setReceivedMessage(text: "Panneau : "+message.string.description)
+        }
+        else {
+            TRACE("message: \(message.string.description), id: \(id)")
+            currentAppState.setReceivedMessage(text: "Message : "+message.string.description)
+        }
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {

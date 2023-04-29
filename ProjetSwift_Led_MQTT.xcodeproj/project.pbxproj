@@ -13,18 +13,18 @@
 		76B88D5C268B7DCC0098185D /* ConnectionStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B88D5B268B7DCC0098185D /* ConnectionStatusBar.swift */; };
 		76C85F98269A0852007BDB95 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C85F97269A0852007BDB95 /* TextView.swift */; };
 		76C85F9A269CB5C4007BDB95 /* MQTTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C85F99269CB5C4007BDB95 /* MQTTTextField.swift */; };
-		76E2F52C25B71BDD00237134 /* ProjetSwift_Led_MQTTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F52B25B71BDD00237134 /* ProjetSwift_Led_MQTTApp.swift */; };
-		76E2F52E25B71BDD00237134 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F52D25B71BDD00237134 /* MessagesView.swift */; };
 		76E2F53025B71BDE00237134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E2F52F25B71BDE00237134 /* Assets.xcassets */; };
 		76E2F53325B71BDE00237134 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E2F53225B71BDE00237134 /* Preview Assets.xcassets */; };
 		76E2F53E25B71BDE00237134 /* ProjetSwift_Led_MQTTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F53D25B71BDE00237134 /* ProjetSwift_Led_MQTTTests.swift */; };
 		76E2F54925B71BDE00237134 /* ProjetSwift_Led_MQTTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F54825B71BDE00237134 /* ProjetSwift_Led_MQTTUITests.swift */; };
 		76E2F55D25B71DCD00237134 /* MQTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F55C25B71DCD00237134 /* MQTTManager.swift */; };
 		76E2F56525B72C4B00237134 /* MQTTAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F56425B72C4B00237134 /* MQTTAppState.swift */; };
-		76E9C21125B87B5000ABC54D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9C21025B87B5000ABC54D /* SettingsView.swift */; };
 		84330BF929F1756E00549A8C /* MQTTPasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84330BF829F1756E00549A8C /* MQTTPasswordField.swift */; };
 		84330BFB29F17A8500549A8C /* TextFieldBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84330BFA29F17A8500549A8C /* TextFieldBase.swift */; };
-		8436A68129E99D3F00B97A42 /* ConnexionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A68029E99D3F00B97A42 /* ConnexionView.swift */; };
+		84330BFF29FC340400549A8C /* ConnexionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A68029E99D3F00B97A42 /* ConnexionView.swift */; };
+		84330C0029FC340700549A8C /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F52D25B71BDD00237134 /* MessagesView.swift */; };
+		84330C0129FC340900549A8C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9C21025B87B5000ABC54D /* SettingsView.swift */; };
+		84330C0229FC340D00549A8C /* ProjetSwift_Led_MQTTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F52B25B71BDD00237134 /* ProjetSwift_Led_MQTTApp.swift */; };
 		FABC6E9B3D504F3648C1B4A2 /* Pods_ProjetSwift_Led_MQTT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B958A435A1F6F50A1DE15E3F /* Pods_ProjetSwift_Led_MQTT.framework */; };
 /* End PBXBuildFile section */
 
@@ -543,18 +543,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76E9C21125B87B5000ABC54D /* SettingsView.swift in Sources */,
+				84330C0029FC340700549A8C /* MessagesView.swift in Sources */,
 				76C85F98269A0852007BDB95 /* TextView.swift in Sources */,
-				8436A68129E99D3F00B97A42 /* ConnexionView.swift in Sources */,
 				76B88D5C268B7DCC0098185D /* ConnectionStatusBar.swift in Sources */,
+				84330C0229FC340D00549A8C /* ProjetSwift_Led_MQTTApp.swift in Sources */,
+				84330BFF29FC340400549A8C /* ConnexionView.swift in Sources */,
 				84330BF929F1756E00549A8C /* MQTTPasswordField.swift in Sources */,
-				76E2F52E25B71BDD00237134 /* MessagesView.swift in Sources */,
 				76B88D5A268B571D0098185D /* BaseButtonStyle.swift in Sources */,
 				76E2F56525B72C4B00237134 /* MQTTAppState.swift in Sources */,
 				76E2F55D25B71DCD00237134 /* MQTTManager.swift in Sources */,
 				76C85F9A269CB5C4007BDB95 /* MQTTTextField.swift in Sources */,
 				84330BFB29F17A8500549A8C /* TextFieldBase.swift in Sources */,
-				76E2F52C25B71BDD00237134 /* ProjetSwift_Led_MQTTApp.swift in Sources */,
+				84330C0129FC340900549A8C /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
