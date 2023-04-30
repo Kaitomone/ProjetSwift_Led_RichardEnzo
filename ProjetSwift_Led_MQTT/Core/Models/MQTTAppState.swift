@@ -18,15 +18,15 @@ enum MQTTAppConnectionState {
     var description: String {
         switch self {
         case .connected:
-            return "Connected"
+            return "Connecté"
         case .disconnected:
-            return "Disconnected"
+            return "Déconnecté"
         case .connecting:
-            return "Connecting"
+            return "En cours de connexion"
         case .connectedSubscribed:
-            return "Subscribed"
+            return "Abonné"
         case .connectedUnSubscribed:
-            return "Connected Unsubscribed"
+            return "Connecté désabonné"
         }
     }
     var isConnected: Bool {
@@ -52,6 +52,7 @@ final class MQTTAppState: ObservableObject {
     @Published var appConnectionState: MQTTAppConnectionState = .disconnected
     @Published var historyText: String = ""
     private var receivedMessage: String = ""
+    var panneauText: String?
 
     func setReceivedMessage(text: String) {
         receivedMessage = text

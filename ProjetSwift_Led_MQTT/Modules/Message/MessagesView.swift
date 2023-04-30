@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
-//  SwiftUI_MQTT
+//  MessageView.swift
+//  ProjetSwift_Led_MQTT
 //
-//  Created by Anoop M on 2021-01-19.
+//  Créer par Enzo Richard le 2023-04-14.
 //
 
 import SwiftUI
@@ -25,61 +25,64 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct MessageView: View {
-    @State var listePanneau = ["Petit", "Moyen", "Grand"]
-    @State var selectedPanneau = "Petit" // Ajout d'une variable pour stocker la sélection
     @State var valueR: String = ""
     @State var valueG: String = ""
     @State var valueB: String = ""
     @State var message: String = ""
+    @State var panneau: String = ""
     @EnvironmentObject private var mqttManager: MQTTManager
     var body: some View {
         VStack {
+            ConnectionStatusBar(message: mqttManager.connectionStateMessage(), isConnected: mqttManager.isConnected())
+            Spacer()
             Text("Affichage LED")
-                .font(.system(size: 40.0))
-            Text("Liste des panneaux")
-                .padding(.top, 10)
+                .scaledToFit()
+                .font(.system(size: 25.0))
+            Text("Panneau LED")
+                .padding(.top, 5)
+            Text(mqttManager.currentAppState.panneauText ?? "Panneau")
+                .padding(.top, 5)
+                .foregroundColor(.secondary)
+                .scaledToFit()
             HStack {
-                // Ajout de la liste déroulante
-                Picker("Sélectionner un panneau", selection: $selectedPanneau) {
-                    ForEach(listePanneau, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .pickerStyle(DefaultPickerStyle())
+                MQTTTextField(placeHolderMessage: "Couleur Rouge", isDisabled: !mqttManager.isSubscribed(), message: $valueR)
+                    .onAppear {
+                            valueR = "0"
+                        }
+                MQTTTextField(placeHolderMessage: "Couleur Verte", isDisabled: !mqttManager.isSubscribed(), message: $valueG)
+                    .onAppear {
+                            valueG = "0"
+                        }
+                MQTTTextField(placeHolderMessage: "Couleur Bleu", isDisabled: !mqttManager.isSubscribed(), message: $valueB)
+                    .onAppear {
+                            valueB = "0"
+                        }
             }
-            Text("Couleur")
-                .padding(.top, 20)
+            .scaledToFit()
             HStack {
-                MQTTTextField(placeHolderMessage: "Couleur Rouge", message: $valueR)
-                MQTTTextField(placeHolderMessage: "Couleur Verte", message: $valueG)
-                MQTTTextField(placeHolderMessage: "Couleur Bleu", message: $valueB)
+                MQTTTextField(placeHolderMessage: "Entrez le message", isDisabled: !mqttManager.isSubscribed(), message: $message)
             }
-            Text("Message")
-                .padding(.top, 20)
-            HStack {
-                MQTTTextField(placeHolderMessage: "Entrez le message", message: $message)
-                Button(action: { send(message: message) }) {
-                    Text("Envoyer").font(.body)
-                }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
-                    .frame(width: 80)
-            }
+            .scaledToFit()
+            Button(action: { send(message: valueR + " " + valueG + " " + valueB + " " + message) }) {
+                Text("Envoyer").font(.body)
+            }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
+                .frame(width: 80)
+                .disabled(!mqttManager.isSubscribed() || message.isEmpty && valueR.isEmpty && valueG.isEmpty && valueB.isEmpty)
+                .scaledToFit()
             Image("MVMC")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 350, height: 200)
-            Spacer()
         }
         .padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
         .navigationBarItems(trailing: NavigationLink(
-            destination: SettingsView(),
+            destination: SettingsView(brokerAddress: mqttManager.currentHost() ?? "", topic: mqttManager.currentTopic() ?? ""),
             label: {
                 Image(systemName: "gear")
             }))
+        Spacer()
     }
 
     private func send(message: String) {
-        let finalMessage = "SwiftUIIOS says: \(message)"
-        mqttManager.publish(with: finalMessage)
-        self.message = ""
+        mqttManager.publish(with: message)
     }
 }

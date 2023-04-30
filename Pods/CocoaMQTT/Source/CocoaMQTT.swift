@@ -133,7 +133,7 @@ protocol CocoaMQTTClient {
 /**
  * MQTT Reader Delegate
  */
-protocol CocoaMQTTReaderDelegate: class {
+protocol CocoaMQTTReaderDelegate: AnyObject {
     func didReceiveConnAck(_ reader: CocoaMQTTReader, connack: UInt8)
     func didReceivePublish(_ reader: CocoaMQTTReader, message: CocoaMQTTMessage, id: UInt16)
     func didReceivePubAck(_ reader: CocoaMQTTReader, msgid: UInt16)
@@ -364,7 +364,10 @@ public class CocoaMQTT: NSObject, CocoaMQTTClient, CocoaMQTTDeliverProtocol {
             } else {
                 try socket.connect(toHost: self.host, onPort: self.port)
             }
-            connState = .connecting
+            dispatchQueue.async { [weak self] in
+                guard let self = self else { return }
+                self.connState = .connecting
+            }
             return true
         } catch let error as NSError {
             printError("socket connect error: \(error.description)")

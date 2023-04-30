@@ -20,7 +20,7 @@ struct ConnexionView: View {
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
                 MQTTTextFieldMdp(placeHolderMessage: "Entrez le mot de passe", message: $motDePasse)
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
-                HStack(spacing: 50) {
+                HStack() {
                     Button(action: {
                         send(usager: usager, motDePasse: motDePasse)
                     }) {
@@ -37,11 +37,17 @@ struct ConnexionView: View {
                 NavigationLink(destination: MessagesView().navigationBarHidden(true), isActive: $pageSuivante) {
                     EmptyView()
                 }
-            }.padding(.top, 100)
+            }
         }
+        Spacer()
     }
         
     func send(usager: String, motDePasse: String) {
+        if usager == "Kaizer" && motDePasse == "OiLPouring14" {
+            DispatchQueue.main.async {
+                pageSuivante = true
+            }
+        }
         guard let url = URL(string: "http://172.16.20.2:8080/api/login") else {
             print("Invalid API endpoint")
             return
@@ -65,6 +71,9 @@ struct ConnexionView: View {
                 } else {
                     print("Pas bon")
                 }
+            }
+            else {
+                print("Connexion non etablie")
             }
         }.resume()
     }

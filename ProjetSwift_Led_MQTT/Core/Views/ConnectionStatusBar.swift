@@ -24,6 +24,6 @@ struct ConnectionStatusBar: View {
 
 struct ConnectionStatusBar_Previews: PreviewProvider {
     static var previews: some View {
-        ConnectionStatusBar(message: "Hello", isConnected: true)
+        ConnectionStatusBar(message: "Salut", isConnected: true)
     }
 }
