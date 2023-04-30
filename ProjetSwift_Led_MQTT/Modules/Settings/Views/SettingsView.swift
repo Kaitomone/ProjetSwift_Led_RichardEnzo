@@ -26,7 +26,6 @@ struct SettingsView: View {
             }
             HStack {
                 MQTTTextField(placeHolderMessage: "Entrez le topic a envoyer", isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
-                MQTTTextField(placeHolderMessage: "Entrez le topic a récupéré", isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic2)
                 Button(action: functionFor(state: mqttManager.currentAppState.appConnectionState)) {
                     Text(titleForSubscribButtonFrom(state: mqttManager.currentAppState.appConnectionState))
                         .font(.system(size: 12.0))
@@ -72,14 +71,12 @@ struct SettingsView: View {
         self.espAddress = ""
     }
     
-    private func subscribe(topic: String, topic2: String) {
+    private func subscribe(topic: String) {
         mqttManager.subscribe(topic: topic)
-        mqttManager.subscribe(topic: topic2)
     }
 
-    private func unsubscribe(topic: String, topic2: String) {
+    private func unsubscribe(topic: String) {
         mqttManager.unSubscribe(topic: topic)
-        mqttManager.unSubscribe(topic: topic2)
     }
     
     private func titleForSubscribButtonFrom(state: MQTTAppConnectionState) -> String {
@@ -94,9 +91,9 @@ struct SettingsView: View {
     private func functionFor(state: MQTTAppConnectionState) -> () -> Void {
         switch state {
         case .connected, .connectedUnSubscribed, .disconnected, .connecting:
-            return { subscribe(topic: topic, topic2: topic2) }
+            return { subscribe(topic: topic) }
         case .connectedSubscribed:
-            return { unsubscribe(topic: topic, topic2: topic2) }
+            return { unsubscribe(topic: topic) }
         }
     }
 }

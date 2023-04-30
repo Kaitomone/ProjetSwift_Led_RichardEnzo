@@ -36,12 +36,14 @@ struct MessageView: View {
             ConnectionStatusBar(message: mqttManager.connectionStateMessage(), isConnected: mqttManager.isConnected())
             Spacer()
             Text("Affichage LED")
-                .font(.system(size: 40.0))
+                .scaledToFit()
+                .font(.system(size: 25.0))
             Text("Panneau LED")
                 .padding(.top, 5)
             Text(mqttManager.currentAppState.panneauText ?? "Panneau")
                 .padding(.top, 5)
                 .foregroundColor(.secondary)
+                .scaledToFit()
             HStack {
                 MQTTTextField(placeHolderMessage: "Couleur Rouge", isDisabled: !mqttManager.isSubscribed(), message: $valueR)
                     .onAppear {
@@ -56,18 +58,20 @@ struct MessageView: View {
                             valueB = "0"
                         }
             }
+            .scaledToFit()
             HStack {
                 MQTTTextField(placeHolderMessage: "Entrez le message", isDisabled: !mqttManager.isSubscribed(), message: $message)
             }
+            .scaledToFit()
             Button(action: { send(message: valueR + " " + valueG + " " + valueB + " " + message) }) {
                 Text("Envoyer").font(.body)
             }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
                 .frame(width: 80)
                 .disabled(!mqttManager.isSubscribed() || message.isEmpty && valueR.isEmpty && valueG.isEmpty && valueB.isEmpty)
+                .scaledToFit()
             Image("MVMC")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 350)
         }
         .padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
         .navigationBarItems(trailing: NavigationLink(

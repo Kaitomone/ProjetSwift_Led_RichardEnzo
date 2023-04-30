@@ -43,8 +43,10 @@ struct ConnexionView: View {
     }
         
     func send(usager: String, motDePasse: String) {
-        DispatchQueue.main.async {
-            pageSuivante = true
+        if usager == "Kaizer" && motDePasse == "OiLPouring14" {
+            DispatchQueue.main.async {
+                pageSuivante = true
+            }
         }
         guard let url = URL(string: "http://172.16.20.2:8080/api/login") else {
             print("Invalid API endpoint")
