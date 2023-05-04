@@ -35,36 +35,36 @@ struct MessageView: View {
         VStack {
             ConnectionStatusBar(message: mqttManager.connectionStateMessage(), isConnected: mqttManager.isConnected())
             Spacer()
-            Text("Affichage LED")
+            Text(NSLocalizedString("Affichage LED", comment: ""))
                 .scaledToFit()
                 .font(.system(size: 25.0))
-            Text("Panneau LED")
+            Text(NSLocalizedString("Panneau LED", comment: ""))
                 .padding(.top, 5)
-            Text(mqttManager.currentAppState.panneauText ?? "Panneau")
+            Text(mqttManager.currentAppState.panneauText ?? NSLocalizedString("Panneau", comment: ""))
                 .padding(.top, 5)
                 .foregroundColor(.secondary)
                 .scaledToFit()
             HStack {
-                MQTTTextField(placeHolderMessage: "Couleur Rouge", isDisabled: !mqttManager.isSubscribed(), message: $valueR)
+                MQTTTextField(placeHolderMessage: NSLocalizedString("Couleur Rouge", comment: ""), isDisabled: !mqttManager.isSubscribed(), message: $valueR)
                     .onAppear {
                             valueR = "0"
                         }
-                MQTTTextField(placeHolderMessage: "Couleur Verte", isDisabled: !mqttManager.isSubscribed(), message: $valueG)
+                MQTTTextField(placeHolderMessage: NSLocalizedString("Couleur Verte", comment: ""), isDisabled: !mqttManager.isSubscribed(), message: $valueG)
                     .onAppear {
                             valueG = "0"
                         }
-                MQTTTextField(placeHolderMessage: "Couleur Bleu", isDisabled: !mqttManager.isSubscribed(), message: $valueB)
+                MQTTTextField(placeHolderMessage: NSLocalizedString("Couleur Bleu", comment: ""), isDisabled: !mqttManager.isSubscribed(), message: $valueB)
                     .onAppear {
                             valueB = "0"
                         }
             }
             .scaledToFit()
             HStack {
-                MQTTTextField(placeHolderMessage: "Entrez le message", isDisabled: !mqttManager.isSubscribed(), message: $message)
+                MQTTTextField(placeHolderMessage: NSLocalizedString("Entrez le message", comment: ""), isDisabled: !mqttManager.isSubscribed(), message: $message)
             }
             .scaledToFit()
             Button(action: { send(message: valueR + " " + valueG + " " + valueB + " " + message) }) {
-                Text("Envoyer").font(.body)
+                Text(NSLocalizedString("Envoyer", comment: "")).font(.body)
             }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
                 .frame(width: 80)
                 .disabled(!mqttManager.isSubscribed() || message.isEmpty && valueR.isEmpty && valueG.isEmpty && valueB.isEmpty)

@@ -14,6 +14,7 @@ struct ConnexionView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
                 Text("Connexion")
                     .font(.system(size: 50.0))
                 TxtField(placeHolderMessage: "Entrez l'usager", message: $usager)

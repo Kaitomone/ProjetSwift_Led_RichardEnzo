@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  ProjetSwift_Led_MQTT
+
+  Created by admin on 2023-05-04.
+  
+*/
+
+"Couleur Bleu" = "Blue Color";
+"Couleur Rouge" = "Red Color";
+"Couleur Verte" = "Green Color";
+"Entrez le message" = "Enter message";
+"Affichage LED" = "LED Display";
+"Panneau LED" = "LED Panel";
+"Panneau" = "Panel";
+"Envoyer" = "Send";

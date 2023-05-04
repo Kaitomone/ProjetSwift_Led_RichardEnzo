@@ -18,14 +18,14 @@ struct SettingsView: View {
         VStack {
             ConnectionStatusBar(message: mqttManager.connectionStateMessage(), isConnected: mqttManager.isConnected())
             Spacer()
-            MQTTTextField(placeHolderMessage: "Entrez l'adresse du broker", isDisabled: mqttManager.currentAppState.appConnectionState != .disconnected, message: $brokerAddress)
+            MQTTTextField(placeHolderMessage: NSLocalizedString("Entrez l'adresse du broker", comment: ""), isDisabled: mqttManager.currentAppState.appConnectionState != .disconnected, message: $brokerAddress)
                 .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
             HStack(spacing: 50) {
                 setUpConnectButton()
                 setUpDisconnectButton()
             }
             HStack {
-                MQTTTextField(placeHolderMessage: "Entrez le topic a envoyer", isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
+                MQTTTextField(placeHolderMessage: NSLocalizedString("Entrez le topic a envoyer", comment: ""), isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
                 Button(action: functionFor(state: mqttManager.currentAppState.appConnectionState)) {
                     Text(titleForSubscribButtonFrom(state: mqttManager.currentAppState.appConnectionState))
                         .font(.system(size: 12.0))
