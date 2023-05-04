@@ -25,7 +25,7 @@ struct SettingsView: View {
                 setUpDisconnectButton()
             }
             HStack {
-                MQTTTextField(placeHolderMessage: NSLocalizedString("Entrez le topic a envoyer", comment: ""), isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
+                MQTTTextField(placeHolderMessage: NSLocalizedString("Entrez le topic", comment: ""), isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
                 Button(action: functionFor(state: mqttManager.currentAppState.appConnectionState)) {
                     Text(titleForSubscribButtonFrom(state: mqttManager.currentAppState.appConnectionState))
                         .font(.system(size: 12.0))
@@ -33,7 +33,7 @@ struct SettingsView: View {
                     .frame(width: 100)
                     .disabled(!mqttManager.isConnected() || topic.isEmpty && topic2.isEmpty)
             }
-            .navigationTitle("Paramètres")
+            .navigationTitle(NSLocalizedString("Paramètres", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             Spacer()
         }
@@ -43,14 +43,14 @@ struct SettingsView: View {
     // Configure / enable /disable connect button
     private func setUpConnectButton() -> some View  {
         return Button(action: { configureAndConnect() }) {
-                Text("Connecter")
+                Text(NSLocalizedString("Connecter", comment: ""))
             }.buttonStyle(BaseButtonStyle(foreground: .white, background: .blue))
         .disabled(mqttManager.currentAppState.appConnectionState != .disconnected || brokerAddress.isEmpty)
     }
     
     private func setUpDisconnectButton() -> some View  {
         return Button(action: { disconnect() }) {
-            Text("Déconnecter")
+            Text(NSLocalizedString("Déconnecter", comment: ""))
         }.buttonStyle(BaseButtonStyle(foreground: .white, background: .red))
         .disabled(mqttManager.currentAppState.appConnectionState == .disconnected)
     }
@@ -82,9 +82,9 @@ struct SettingsView: View {
     private func titleForSubscribButtonFrom(state: MQTTAppConnectionState) -> String {
         switch state {
         case .connected, .connectedUnSubscribed, .disconnected, .connecting:
-            return "S'abonner"
+            return NSLocalizedString("S'abonner", comment: "")
         case .connectedSubscribed:
-            return "Se désabonner"
+            return NSLocalizedString("Se désabonner", comment: "")
         }
     }
     

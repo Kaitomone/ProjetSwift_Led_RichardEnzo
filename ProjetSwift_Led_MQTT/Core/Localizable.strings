@@ -14,3 +14,19 @@
 "Panneau LED" = "LED Panel";
 "Panneau" = "Panel";
 "Envoyer" = "Send";
+"Connexion" = "Login";
+"Entrez l'usager" = "Enter username";
+"Entrez le mot de passe" = "Enter password";
+"Entrez l'adresse du broker" = "Enter the broker adress";
+"Entrez le topic" = "Enter the topic";
+"Connecter" = "Connect";
+"Déconnecter" = "Disconnected";
+"Déconnecté" = "Disconnected";
+"S'abonner" = "Subscribe";
+"Abonné" = "Subscribed";
+"Se désabonner" = "Unsubscribe";
+"Connecté" = "Connected";
+"En cours de connexion" = "In the process of being connected";
+"Connecté désabonné" = "Unsubscribed connected";
+"Paramètres" = "Settings";
+

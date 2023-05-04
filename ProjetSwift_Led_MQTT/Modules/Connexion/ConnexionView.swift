@@ -15,17 +15,17 @@ struct ConnexionView: View {
         NavigationView {
             VStack {
                 
-                Text("Connexion")
+                Text(NSLocalizedString("Connexion", comment: ""))
                     .font(.system(size: 50.0))
-                TxtField(placeHolderMessage: "Entrez l'usager", message: $usager)
+                TxtField(placeHolderMessage: NSLocalizedString("Entrez l'usager", comment: ""), message: $usager)
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
-                MQTTTextFieldMdp(placeHolderMessage: "Entrez le mot de passe", message: $motDePasse)
+                MQTTTextFieldMdp(placeHolderMessage: NSLocalizedString("Entrez le mot de passe", comment: ""), message: $motDePasse)
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
                 HStack() {
                     Button(action: {
                         send(usager: usager, motDePasse: motDePasse)
                     }) {
-                        Text("Envoyer").font(.body)
+                        Text(NSLocalizedString("Envoyer", comment: "")).font(.body)
                     }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
                         .frame(width: 100)
                 }
