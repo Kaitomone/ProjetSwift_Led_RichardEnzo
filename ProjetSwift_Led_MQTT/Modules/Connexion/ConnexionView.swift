@@ -3,15 +3,20 @@
 //  ProjetSwift_Led_MQTT
 //
 //  Créer par Enzo le 2023-04-14.
+//  Modifié le 2023-05-05
 //
+//  Cette page est la première page de l'application, l'utilisateur peut chosir la langue et peut se connecter avec
+//      ses identifiants
 
 import SwiftUI
 
 struct ConnexionView: View {
+    // Variable de texte pour la traduction
     @State var usagerString: String = ""
     @State var motDePasseString: String = ""
     @State var connexionString: String = ""
     @State var envoyerString: String = ""
+    // Variable pour la connexion avec l'API
     @State var usager: String = ""
     @State var motDePasse: String = ""
     @State private var pageSuivante:Bool = false
@@ -56,6 +61,7 @@ struct ConnexionView: View {
         .onAppear(perform: languageDefault)
         Spacer()
     }
+    // Fonction qui permettre d'afficher le texte au chargement de la page
     func languageDefault() {
         if selectedLangue == "fr" {
             connexionString = "Connexion"
@@ -70,6 +76,7 @@ struct ConnexionView: View {
             envoyerString = "Send"
         }
     }
+    // Fonction qui permet de modifier la langue du texte
     func setLanguage(_ langue: String) {
         if langue == "fr" {
             connexionString = "Connexion"
@@ -86,7 +93,7 @@ struct ConnexionView: View {
         UserDefaults.standard.set([langue], forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
     }
-    
+    // Fonction pour la connexion avec l'API
     func send(usager: String, motDePasse: String) {
         guard let url = URL(string: "http://172.16.7.72:8080/api/login") else {
             print("Invalid API endpoint")

@@ -3,11 +3,15 @@
 //  ProjetSwift_Led_MQTT
 //
 //  Créer par Enzo Richard le 2023-04-14.
+//  Modifié le 2023-05-05
 //
+//  Page des paramétres de l'application. L'utilisateur peut chosir sa langue. Il peut se connecter au broker.
+//      Ainsi que s'abonner aux différents topics. Il peut ensuite se désabonner ou se déconnecter.
 
 import SwiftUI
 
 struct SettingsView: View {
+    // Variable de texte pour la traduction
     @State var brokerString: String = ""
     @State var topicString: String = ""
     @State var parametresString: String = ""
@@ -15,7 +19,7 @@ struct SettingsView: View {
     @State var deconnecterString: String = ""
     @State var sAbonnerString: String = ""
     @State var seDesabonnerString: String = ""
-    
+    // Variable pour l'envoie au broker
     @State var brokerAddress: String = ""
     @State var espAddress: String = ""
     @State var topic: String = ""
@@ -58,6 +62,7 @@ struct SettingsView: View {
         }
         
     }
+    // Fonction qui permettre d'afficher le texte au chargement de la page
     func languageDefault() {
         if selectedLangue == "fr" {
             brokerString = "Entrez l'adresse du broker"
@@ -78,6 +83,7 @@ struct SettingsView: View {
             seDesabonnerString = "Unsubscribe"
         }
     }
+    // Fonction qui permet de modifier la langue du texte
     func setLanguage(_ langue: String) {
         if langue == "fr" {
             brokerString = "Entrez l'adresse du broker"

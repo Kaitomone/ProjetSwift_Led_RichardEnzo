@@ -3,7 +3,12 @@
 //  ProjetSwift_Led_MQTT
 //
 //  Créer par Enzo Richard le 2023-04-14.
+//  Modifié le 2023-05-05
 //
+//  Cette page est la page principale de l'application. Si l'utilisateur est connecté et abonné au bon topic
+//      il peut alors envoyer son message avec les couleurs qu'il veut au broker, pour que cela s'affiche sur
+//      le panneau LED.
+//      Si la personne n'est pas connecté, ni abonné, alors il peut allé dans les paramètres.
 
 import SwiftUI
 
@@ -25,6 +30,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct MessageView: View {
+    // Variable de texte pour la traduction
     @State var rougeString: String = ""
     @State var bleutring: String = ""
     @State var vertString: String = ""
@@ -33,7 +39,7 @@ struct MessageView: View {
     @State var panneauString: String = ""
     @State var messageString: String = ""
     @State var envoyerString: String = ""
-    
+    // Variable pour l'envoie au broker
     @State var valueR: String = ""
     @State var valueG: String = ""
     @State var valueB: String = ""
@@ -44,7 +50,6 @@ struct MessageView: View {
     var langues = ["fr", "en"] // available options
     var body: some View {
         VStack {
-            
             ConnectionStatusBar(message: mqttManager.connectionStateMessage(), isConnected: mqttManager.isConnected())
             Picker(selection: $selectedLangue, label: Text("Langue")) {
                 ForEach(langues, id: \.self) {
@@ -103,6 +108,7 @@ struct MessageView: View {
         Spacer()
         
     }
+    // Fonction qui permettre d'afficher le texte au chargement de la page
     func languageDefault() {
         print("MessageView, selectedLangue = " + selectedLangue)
         if selectedLangue == "fr" {
@@ -126,6 +132,7 @@ struct MessageView: View {
             envoyerString = "Send"
         }
     }
+    // Fonction qui permet de modifier la langue du texte
     func setLanguage(_ langue: String) {
         print("MessageView, langue = " + langue)
         if langue == "fr" {
@@ -151,7 +158,7 @@ struct MessageView: View {
         UserDefaults.standard.set([langue], forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
     }
-
+    // Fonction pour envoyer le message au broker avec le topic actuel
     private func send(message: String) {
         mqttManager.publish(with: message)
     }
