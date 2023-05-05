@@ -1,0 +1,37 @@
+// French
+
+
+"Connexion-string" = "Connexion";
+"Utilisateur-string" = "Entrez le nom d'utilisateur";
+"MotDePasse-string" = "Entrez le mot de passe";
+"Envoyer-string" = "Envoyer";
+
+"AffichageLED-string" = "Affichage LED";
+"PanneauLED-string" = "Panneau LED";
+"Panneau-string" = "Panneau";
+
+"Message-string" = "Entrez le message";
+
+"Bleu-string" = "Couleur Bleu";
+"Rouge-string" = "Couleur Rouge";
+"Vert-string" = "Couleur Verte";
+
+
+"Paramètres" = "Paramètres";
+
+"Broker-string" = "Entrez l'adresse du broker";
+"Topic-string" = "Entrez le topic";
+
+"Connecter" = "Connecter";
+"Connecté" = "Connecté";
+"En cours de connexion" = "En cours de connexion";
+
+"Déconnecter" = "Déconnecter";
+"Déconnecté" = "Déconnecté";
+
+"S'abonner" = "S'abonner";
+"Abonné" = "Abonné";
+
+"Se désabonner" = "Se désabonner";
+"Connecté désabonné" = "Connecté désabonné";
+

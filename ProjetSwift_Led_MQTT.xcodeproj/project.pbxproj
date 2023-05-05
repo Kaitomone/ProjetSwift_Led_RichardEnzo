@@ -45,6 +45,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		84B81F6F2A03F1E8006E0065 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		090EC9D5DA246024592FF601 /* Pods-ProjetSwift_Led_MQTT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjetSwift_Led_MQTT.release.xcconfig"; path = "Target Support Files/Pods-ProjetSwift_Led_MQTT/Pods-ProjetSwift_Led_MQTT.release.xcconfig"; sourceTree = "<group>"; };
 		11DB02FF63248B162605F67C /* Pods_ProjetSwift_Led_MQTT_ProjetSwift_Led_MQTTUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjetSwift_Led_MQTT_ProjetSwift_Led_MQTTUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +313,7 @@
 				76E2F52525B71BDD00237134 /* Frameworks */,
 				76E2F52625B71BDD00237134 /* Resources */,
 				59F0C7783C6FFD85D9240380 /* [CP] Embed Pods Frameworks */,
+				84B81F6F2A03F1E8006E0065 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -722,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = .com.MVMC.projetLed;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.MVMC.projetSwiftLed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -745,7 +759,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = .com.MVMC.projetLed;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.MVMC.projetSwiftLed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

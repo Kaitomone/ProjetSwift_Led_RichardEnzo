@@ -1,0 +1,24 @@
+// English
+"Couleur Bleu" = "Blue Color";
+"Couleur Rouge" = "Red Color";
+"Couleur Verte" = "Green Color";
+"Entrez le message" = "Enter message";
+"Affichage LED" = "LED Display";
+"Panneau LED" = "LED Panel";
+"Panneau-string" = "Panel";
+"Envoyer-string" = "Send";
+"Connexion-string" = "Login";
+"Utilisateur-string" = "Enter username";
+"MotDePasse-string" = "Enter password";
+"Broker-string" = "Enter the broker adress";
+"Topic-string" = "Enter the topic";
+"Connecter" = "Connect";
+"Déconnecter" = "Disconnected";
+"Déconnecté" = "Disconnected";
+"S'abonner" = "Subscribe";
+"Abonné" = "Subscribed";
+"Se désabonner" = "Unsubscribe";
+"Connecté" = "Connected";
+"En cours de connexion" = "In the process of being connected";
+"Connecté désabonné" = "Unsubscribed connected";
+"Paramètres" = "Settings";
