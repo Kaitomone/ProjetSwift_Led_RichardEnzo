@@ -8,24 +8,37 @@
 import SwiftUI
 
 struct ConnexionView: View {
+    @State var usagerString: String = ""
+    @State var motDePasseString: String = ""
+    @State var connexionString: String = ""
+    @State var envoyerString: String = ""
     @State var usager: String = ""
     @State var motDePasse: String = ""
     @State private var pageSuivante:Bool = false
+    @State private var selectedLangue = Bundle.main.preferredLocalizations.first ?? "fr"
+    var langues = ["fr", "en"] // available options
     var body: some View {
         NavigationView {
             VStack {
-                
-                Text(NSLocalizedString("Connexion", comment: ""))
+                Text(connexionString)
                     .font(.system(size: 50.0))
-                TxtField(placeHolderMessage: NSLocalizedString("Entrez l'usager", comment: ""), message: $usager)
+                Picker(selection: $selectedLangue, label: Text("Langue")) {
+                    ForEach(langues, id: \.self) {
+                        Text($0)
+                    }
+                }.pickerStyle(MenuPickerStyle())
+                .onChange(of: selectedLangue) { languageCode in
+                    setLanguage(languageCode)
+                }
+                TxtField(placeHolderMessage: NSLocalizedString(usagerString, comment: ""), message: $usager)
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
-                MQTTTextFieldMdp(placeHolderMessage: NSLocalizedString("Entrez le mot de passe", comment: ""), message: $motDePasse)
+                MQTTTextFieldMdp(placeHolderMessage: NSLocalizedString(motDePasseString, comment: ""), message: $motDePasse)
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
                 HStack() {
                     Button(action: {
                         send(usager: usager, motDePasse: motDePasse)
                     }) {
-                        Text(NSLocalizedString("Envoyer", comment: "")).font(.body)
+                        Text(NSLocalizedString(envoyerString, comment: "")).font(.body)
                     }.buttonStyle(BaseButtonStyle(foreground: .white, background: .green))
                         .frame(width: 100)
                 }
@@ -40,9 +53,40 @@ struct ConnexionView: View {
                 }
             }
         }
+        .onAppear(perform: languageDefault)
         Spacer()
     }
-        
+    func languageDefault() {
+        if selectedLangue == "fr" {
+            connexionString = "Connexion"
+            usagerString = "Entrez le nom d'utilisateur"
+            motDePasseString = "Entrez le mot de passe"
+            envoyerString = "Envoyer"
+        }
+        if selectedLangue == "en" {
+            connexionString = "Login"
+            usagerString = "Enter username"
+            motDePasseString = "Enter password"
+            envoyerString = "Send"
+        }
+    }
+    func setLanguage(_ langue: String) {
+        if langue == "fr" {
+            connexionString = "Connexion"
+            usagerString = "Entrez le nom d'utilisateur"
+            motDePasseString = "Entrez le mot de passe"
+            envoyerString = "Envoyer"
+        }
+        if langue == "en" {
+            connexionString = "Login"
+            usagerString = "Enter username"
+            motDePasseString = "Enter password"
+            envoyerString = "Send"
+        }
+        UserDefaults.standard.set([langue], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
+    }
+    
     func send(usager: String, motDePasse: String) {
         guard let url = URL(string: "http://172.16.7.72:8080/api/login") else {
             print("Invalid API endpoint")
