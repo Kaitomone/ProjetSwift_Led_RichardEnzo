@@ -10,44 +10,66 @@
 
 import SwiftUI
 
+extension String {
+
+    var localized: String {
+        let lang = currentLanguage()
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+
+    //Remove here and add these in utilities class
+    func saveLanguage(_ lang: String) {
+        UserDefaults.standard.set(lang, forKey: "Local")
+        UserDefaults.standard.synchronize()
+    }
+
+    func currentLanguage() -> String {
+        return (Language.ID(rawValue: UserDefaults.standard.string(forKey: "Local") ?? "fr") ?? Language.en).rawValue
+    }
+}
+
+enum Language: String, CaseIterable, Identifiable {
+    case en, fr
+    var id: Self { self }
+}
+
 struct SettingsView: View {
-    // Variable de texte pour la traduction
-    @State var brokerString: String = ""
-    @State var topicString: String = ""
-    @State var parametresString: String = ""
-    @State var connecterString: String = ""
-    @State var deconnecterString: String = ""
-    @State var sAbonnerString: String = ""
-    @State var seDesabonnerString: String = ""
     // Variable pour l'envoie au broker
     @State var brokerAddress: String = ""
     @State var espAddress: String = ""
     @State var topic: String = ""
     @State var topic2: String = ""
     @State var panneau: String = ""
+    @State var selectedLangue = Language.fr
     @EnvironmentObject private var mqttManager: MQTTManager
-    @State private var selectedLangue = Bundle.main.preferredLocalizations.first ?? "fr"
-    var langues = ["fr", "en"] // available options
     var body: some View {
         VStack {
             ConnectionStatusBar(message: mqttManager.connectionStateMessage(), isConnected: mqttManager.isConnected())
-            Picker(selection: $selectedLangue, label: Text("Langue")) {
-                ForEach(langues, id: \.self) {
-                    Text($0)
+            HStack{
+                List {
+                    Picker("Langue".localized, selection: $selectedLangue) {
+                        Text("Français").tag(Language.fr)
+                        Text("English").tag(Language.en)
+                    }.onChange(of: selectedLangue) { langue in
+                        UserDefaults.standard.removeObject(forKey: "Local")
+                        mqttManager.currentLanguageState.setAppLanguage(language: "\(langue)")
+                        UserDefaults.standard.set("\(langue)", forKey: "Local")
+                        UserDefaults.standard.synchronize()
+                    }
                 }
-            }.pickerStyle(MenuPickerStyle())
-            .onChange(of: selectedLangue) { languageCode in
-                setLanguage(languageCode)
             }
-            Spacer()
-            MQTTTextField(placeHolderMessage: brokerString, isDisabled: mqttManager.currentAppState.appConnectionState != .disconnected, message: $brokerAddress)
-                .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
-            HStack(spacing: 50) {
+            HStack {
+                MQTTTextField(placeHolderMessage: "Entrer l'adresse du broker".localized, isDisabled: mqttManager.currentAppState.appConnectionState != .disconnected, message: $brokerAddress)
+                    .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
+            }
+            HStack {
                 setUpConnectButton()
                 setUpDisconnectButton()
             }
             HStack {
-                MQTTTextField(placeHolderMessage: topicString, isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
+                MQTTTextField(placeHolderMessage: "Entrer le topic".localized, isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
                 Button(action: functionFor(state: mqttManager.currentAppState.appConnectionState)) {
                     Text(titleForSubscribButtonFrom(state: mqttManager.currentAppState.appConnectionState))
                         .font(.system(size: 12.0))
@@ -55,68 +77,23 @@ struct SettingsView: View {
                     .frame(width: 100)
                     .disabled(!mqttManager.isConnected() || topic.isEmpty && topic2.isEmpty)
             }
-            .navigationTitle(parametresString)
+            .navigationTitle(NSLocalizedString("Paramètres".localized, comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             Spacer()
-            .onAppear(perform: languageDefault)
-        }
-        
-    }
-    // Fonction qui permettre d'afficher le texte au chargement de la page
-    func languageDefault() {
-        if selectedLangue == "fr" {
-            brokerString = "Entrez l'adresse du broker"
-            topicString = "Entrez le topic"
-            parametresString = "Paramètres"
-            connecterString = "Connecter"
-            deconnecterString = "Déconnecter"
-            sAbonnerString = "S'abonner"
-            seDesabonnerString = "Se désabonner"
-        }
-        if selectedLangue == "en" {
-            brokerString = "Enter the broker adress"
-            topicString = "Enter the topic"
-            parametresString = "Settings"
-            connecterString = "Connect"
-            deconnecterString = "Disconnected"
-            sAbonnerString = "Subscribe"
-            seDesabonnerString = "Unsubscribe"
         }
     }
-    // Fonction qui permet de modifier la langue du texte
-    func setLanguage(_ langue: String) {
-        if langue == "fr" {
-            brokerString = "Entrez l'adresse du broker"
-            topicString = "Entrez le topic"
-            parametresString = "Paramètres"
-            connecterString = "Connecter"
-            deconnecterString = "Déconnecter"
-            sAbonnerString = "S'abonner"
-            seDesabonnerString = "Se désabonner"
-        }
-        if langue == "en" {
-            brokerString = "Enter the broker adress"
-            topicString = "Enter the topic"
-            parametresString = "Settings"
-            connecterString = "Connect"
-            deconnecterString = "Disconnected"
-            sAbonnerString = "Subscribe"
-            seDesabonnerString = "Unsubscribe"
-        }
-        UserDefaults.standard.set([langue], forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
-    }
+    
     // Configure / enable /disable connect button
     private func setUpConnectButton() -> some View  {
         return Button(action: { configureAndConnect() }) {
-                Text(connecterString)
+                Text("Entrer l'adresse du broker".localized)
             }.buttonStyle(BaseButtonStyle(foreground: .white, background: .blue))
         .disabled(mqttManager.currentAppState.appConnectionState != .disconnected || brokerAddress.isEmpty)
     }
     
     private func setUpDisconnectButton() -> some View  {
         return Button(action: { disconnect() }) {
-            Text(deconnecterString)
+            Text("Entrer l'adresse du broker".localized)
         }.buttonStyle(BaseButtonStyle(foreground: .white, background: .red))
         .disabled(mqttManager.currentAppState.appConnectionState == .disconnected)
     }
@@ -148,9 +125,9 @@ struct SettingsView: View {
     private func titleForSubscribButtonFrom(state: MQTTAppConnectionState) -> String {
         switch state {
         case .connected, .connectedUnSubscribed, .disconnected, .connecting:
-            return sAbonnerString
+            return "S'abonné".localized
         case .connectedSubscribed:
-            return seDesabonnerString
+            return "Se déconnecter".localized
         }
     }
     
