@@ -111,16 +111,15 @@ struct ConnexionView: View {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
-                    print("Bon")
                     DispatchQueue.main.async {
                         pageSuivante = true
                     }
                 } else {
-                    print("Pas bon")
+
                 }
             }
             else {
-                print("Connexion non etablie")
+
             }
         }.resume()
     }

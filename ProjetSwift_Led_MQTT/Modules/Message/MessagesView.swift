@@ -110,7 +110,6 @@ struct MessageView: View {
     }
     // Fonction qui permettre d'afficher le texte au chargement de la page
     func languageDefault() {
-        print("MessageView, selectedLangue = " + selectedLangue)
         if selectedLangue == "fr" {
             affichageLedString = "Affichage LED"
             panneauLedString = "Panneau LED"
@@ -134,7 +133,6 @@ struct MessageView: View {
     }
     // Fonction qui permet de modifier la langue du texte
     func setLanguage(_ langue: String) {
-        print("MessageView, langue = " + langue)
         if langue == "fr" {
             affichageLedString = "Affichage LED"
             panneauLedString = "Panneau LED"
