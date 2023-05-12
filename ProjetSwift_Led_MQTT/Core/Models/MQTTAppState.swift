@@ -24,7 +24,7 @@ enum MQTTAppConnectionState {
         case .connecting:
             return "En cours de connexion".localized
         case .connectedSubscribed:
-            return "Abonné"
+            return "Abonné".localized
         case .connectedUnSubscribed:
             return "Connecté désabonné".localized
         }
