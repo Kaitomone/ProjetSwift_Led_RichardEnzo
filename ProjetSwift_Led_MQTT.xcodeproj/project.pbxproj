@@ -25,6 +25,8 @@
 		84330C0029FC340700549A8C /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F52D25B71BDD00237134 /* MessagesView.swift */; };
 		84330C0129FC340900549A8C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9C21025B87B5000ABC54D /* SettingsView.swift */; };
 		84330C0229FC340D00549A8C /* ProjetSwift_Led_MQTTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2F52B25B71BDD00237134 /* ProjetSwift_Led_MQTTApp.swift */; };
+		843F83D32A0D283B009778BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 843F83D52A0D283B009778BD /* Localizable.strings */; };
+		843F83D82A0D3469009778BD /* LangugageAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F83D72A0D3469009778BD /* LangugageAppState.swift */; };
 		FABC6E9B3D504F3648C1B4A2 /* Pods_ProjetSwift_Led_MQTT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B958A435A1F6F50A1DE15E3F /* Pods_ProjetSwift_Led_MQTT.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,9 @@
 		84330BF829F1756E00549A8C /* MQTTPasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTPasswordField.swift; sourceTree = "<group>"; };
 		84330BFA29F17A8500549A8C /* TextFieldBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBase.swift; sourceTree = "<group>"; };
 		8436A68029E99D3F00B97A42 /* ConnexionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionView.swift; sourceTree = "<group>"; };
+		843F83D42A0D283B009778BD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		843F83D62A0D2843009778BD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		843F83D72A0D3469009778BD /* LangugageAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangugageAppState.swift; sourceTree = "<group>"; };
 		B958A435A1F6F50A1DE15E3F /* Pods_ProjetSwift_Led_MQTT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjetSwift_Led_MQTT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B99E27BB1B215A3441C40142 /* Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests/Pods-ProjetSwift_Led_MQTT-ProjetSwift_Led_MQTTUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +154,7 @@
 		76E2F51F25B71BDD00237134 = {
 			isa = PBXGroup;
 			children = (
+				843F83D52A0D283B009778BD /* Localizable.strings */,
 				76E2F52A25B71BDD00237134 /* ProjetSwift_Led_MQTT */,
 				76E2F53C25B71BDE00237134 /* ProjetSwift_Led_MQTTTests */,
 				76E2F54725B71BDE00237134 /* ProjetSwift_Led_MQTTUITests */,
@@ -222,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				76E2F56425B72C4B00237134 /* MQTTAppState.swift */,
+				843F83D72A0D3469009778BD /* LangugageAppState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -393,6 +400,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 76E2F51F25B71BDD00237134;
 			productRefGroup = 76E2F52925B71BDD00237134 /* Products */;
@@ -412,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76E2F53325B71BDE00237134 /* Preview Assets.xcassets in Resources */,
+				843F83D32A0D283B009778BD /* Localizable.strings in Resources */,
 				76E2F53025B71BDE00237134 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,6 +578,7 @@
 				76C85F9A269CB5C4007BDB95 /* MQTTTextField.swift in Sources */,
 				84330BFB29F17A8500549A8C /* TextFieldBase.swift in Sources */,
 				84330C0129FC340900549A8C /* SettingsView.swift in Sources */,
+				843F83D82A0D3469009778BD /* LangugageAppState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +612,18 @@
 			targetProxy = 76E2F54525B71BDE00237134 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		843F83D52A0D283B009778BD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843F83D42A0D283B009778BD /* en */,
+				843F83D62A0D2843009778BD /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		76E2F54B25B71BDE00237134 /* Debug */ = {

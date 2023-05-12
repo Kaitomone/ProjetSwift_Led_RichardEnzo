@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  ProjetSwift_Led_MQTT
+
+  Created by admin on 2023-05-11.
+  
+*/
+"Connexion" = "Connexion";
+"Entrez le nom d'utilisateur" = "Entrez le nom d'utilisateur";
+"Entrez le mot de passe" = "Entrez le mot de passe";
+"Envoyer" = "Envoyer";
+
+"Affichage LED" = "Affichage LED";
+"Panneau LED" = "Panneau LED";
+"Panneau" = "Panneau";
+
+"Entrez le message" = "Entrez le message";
+
+"Couleur Bleu" = "Couleur Bleu";
+"Couleur Rouge" = "Couleur Rouge";
+"Couleur Vert" = "Couleur Verte";
+
+
+"Paramètres" = "Paramètres";
+
+"Entrez l'adresse du broker" = "Entrez l'adresse du broker";
+"Entrez le topic" = "Entrez le topic";
+
+"Connecter" = "Connecter";
+"Connecté" = "Connecté";
+"En cours de connexion" = "En cours de connexion";
+
+"Déconnecter" = "Déconnecter";
+"Déconnecté" = "Déconnecté";
+
+"S'abonner" = "S'abonner";
+"Abonné" = "Abonné";
+
+"Se désabonner" = "Se désabonner";
+"Connecté désabonné" = "Connecté désabonné";
+
+
