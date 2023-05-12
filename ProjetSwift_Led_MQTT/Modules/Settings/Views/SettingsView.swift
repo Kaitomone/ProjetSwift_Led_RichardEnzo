@@ -42,7 +42,7 @@ struct SettingsView: View {
     @State var topic: String = ""
     @State var topic2: String = ""
     @State var panneau: String = ""
-    @State var selectedLangue = Language.fr
+    @State var selectedLangue = Language.ID(rawValue: UserDefaults.standard.string(forKey: "Local") ?? "fr") ?? Language.fr
     @EnvironmentObject private var mqttManager: MQTTManager
     var body: some View {
         VStack {
@@ -61,7 +61,7 @@ struct SettingsView: View {
                 }
             }
             HStack {
-                MQTTTextField(placeHolderMessage: "Entrer l'adresse du broker".localized, isDisabled: mqttManager.currentAppState.appConnectionState != .disconnected, message: $brokerAddress)
+                MQTTTextField(placeHolderMessage: "Entrez l'adresse du broker".localized, isDisabled: mqttManager.currentAppState.appConnectionState != .disconnected, message: $brokerAddress)
                     .padding(EdgeInsets(top: 0.0, leading: 7.0, bottom: 0.0, trailing: 7.0))
             }
             HStack {
@@ -69,7 +69,7 @@ struct SettingsView: View {
                 setUpDisconnectButton()
             }
             HStack {
-                MQTTTextField(placeHolderMessage: "Entrer le topic".localized, isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
+                MQTTTextField(placeHolderMessage: "Entrez le topic".localized, isDisabled: !mqttManager.isConnected() || mqttManager.isSubscribed(), message: $topic)
                 Button(action: functionFor(state: mqttManager.currentAppState.appConnectionState)) {
                     Text(titleForSubscribButtonFrom(state: mqttManager.currentAppState.appConnectionState))
                         .font(.system(size: 12.0))
@@ -86,14 +86,14 @@ struct SettingsView: View {
     // Configure / enable /disable connect button
     private func setUpConnectButton() -> some View  {
         return Button(action: { configureAndConnect() }) {
-                Text("Entrer l'adresse du broker".localized)
+                Text("Connecter".localized)
             }.buttonStyle(BaseButtonStyle(foreground: .white, background: .blue))
         .disabled(mqttManager.currentAppState.appConnectionState != .disconnected || brokerAddress.isEmpty)
     }
     
     private func setUpDisconnectButton() -> some View  {
         return Button(action: { disconnect() }) {
-            Text("Entrer l'adresse du broker".localized)
+            Text("Déconnecter".localized)
         }.buttonStyle(BaseButtonStyle(foreground: .white, background: .red))
         .disabled(mqttManager.currentAppState.appConnectionState == .disconnected)
     }
